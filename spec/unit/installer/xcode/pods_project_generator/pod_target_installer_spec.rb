@@ -618,12 +618,12 @@ module Pod
                 native_target = @project.targets.find { |t| t.name == @watermelon_ios_pod_target.label }
                 compatibility_header_phase = native_target.build_phases.find { |ph| ph.display_name == 'Copy generated compatibility header' }
                 compatibility_header_phase.shell_script.should == <<-'SH'.strip_heredoc
-                  COMPATIBILITY_HEADER_PATH="${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h"
-                  MODULE_MAP_PATH="${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap"
+                  COMPATIBILITY_HEADER_PATH="${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h"
+                  MODULE_MAP_PATH="${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}/${PRODUCT_MODULE_NAME}.modulemap"
 
                   ditto "${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h" "${COMPATIBILITY_HEADER_PATH}"
                   ditto "${PODS_ROOT}/Headers/Public/WatermelonLib/WatermelonLib.modulemap" "${MODULE_MAP_PATH}"
-                  ditto "${PODS_ROOT}/Headers/Public/WatermelonLib/WatermelonLib-umbrella.h" "${BUILT_PRODUCTS_DIR}"
+                  ditto "${PODS_ROOT}/Headers/Public/WatermelonLib/WatermelonLib-umbrella.h" "${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}/"
                   printf "\n\nmodule ${PRODUCT_MODULE_NAME}.Swift {\n  header \"${COMPATIBILITY_HEADER_PATH}\"\n  requires objc\n}\n" >> "${MODULE_MAP_PATH}"
                 SH
                 compatibility_header_phase.input_paths.should == %w(${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h ${PODS_ROOT}/Headers/Public/WatermelonLib/WatermelonLib.modulemap ${PODS_ROOT}/Headers/Public/WatermelonLib/WatermelonLib-umbrella.h)

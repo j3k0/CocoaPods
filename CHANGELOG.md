@@ -4,6 +4,66 @@ To install or update CocoaPods see this [guide](https://guides.cocoapods.org/usi
 
 To install release candidates run `[sudo] gem install cocoapods --pre`
 
+## Master
+
+##### Enhancements
+
+* Correctly handle .docc documentation in source_files.  
+  [haifengkao](https://github.com/haifengkao)
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#11438](https://github.com/CocoaPods/CocoaPods/pull/11438)
+  [#10885](https://github.com/CocoaPods/CocoaPods/issues/10885)
+
+* Re-use the same path lists for pods that share the same root.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#11417](https://github.com/CocoaPods/CocoaPods/pull/11417)
+
+* Integrate `parallelizable` scheme DSL option.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#11399](https://github.com/CocoaPods/CocoaPods/pull/11399)
+
+* Use `${DEVELOPMENT_LANGUAGE}` as the default `CFBundleDevelopmentRegion` value in any generated `Info.plist`.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#10950](https://github.com/CocoaPods/CocoaPods/pull/10950)
+
+* Fix setting `LD_RUNTIME_SEARCH_PATHS` for aggregate targets that include dynamic xcframeworks.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#11158](https://github.com/CocoaPods/CocoaPods/pull/11158)
+
+* Add method for formatting licenses for acknowledgements generation.  
+  [Raihaan Shouhell](https://github.com/res0nance)
+  [#10940](https://github.com/CocoaPods/CocoaPods/pull/10940)
+
+* Add the ability to download pods in parallel  
+  [Seth Friedman](https://github.com/sethfri)
+  [#11232](https://github.com/CocoaPods/CocoaPods/pull/11232)
+
+* Include subprojects in the plugin post-install hook context  
+  [Eric Amorde](https://github.com/amorde)
+  [#11224](https://github.com/CocoaPods/CocoaPods/pull/11224)
+
+##### Bug Fixes
+
+* Clean sandbox when a pod switches from remote to local.  
+  [Dimitris Koutsogiorgas](https://github.com/dnkoutso)
+  [#11213](https://github.com/CocoaPods/CocoaPods/pull/11213)
+
+* Run post install hooks when "skip Pods.xcodeproj generation" option is set  
+  [Elton Gao](https://github.com/gyfelton)
+  [#11073](https://github.com/CocoaPods/CocoaPods/pull/11073)
+
+* Change minimal required version of ruby-macho to 2.3.0.  
+  [xuzhongping](https://github.com/xuzhongping)
+  [#10390](https://github.com/CocoaPods/CocoaPods/issues/10390)
+
+* Add .gitignores to the banana and snake fixtures  
+  [Seth Friedman](https://github.com/sethfri)
+  [#11235](https://github.com/CocoaPods/CocoaPods/pull/11235)
+
+* Fix issue with custom build directory configuration
+  [Jean-Christophe Hoelt](https://github.com/j3k0)
+  [#10675](https://github.com/CocoaPods/CocoaPods/issues/10675)
+
 ## 1.11.3 (2022-03-16)
 
 ##### Enhancements

@@ -1127,12 +1127,12 @@ module Pod
             relative_umbrella_header_path = target.umbrella_header_path.relative_path_from(target.sandbox.root)
 
             build_phase.shell_script = <<-SH.strip_heredoc
-              COMPATIBILITY_HEADER_PATH="${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h"
-              MODULE_MAP_PATH="${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap"
+              COMPATIBILITY_HEADER_PATH="${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h"
+              MODULE_MAP_PATH="${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}/${PRODUCT_MODULE_NAME}.modulemap"
 
               ditto "${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h" "${COMPATIBILITY_HEADER_PATH}"
               ditto "${PODS_ROOT}/#{relative_module_map_path}" "${MODULE_MAP_PATH}"
-              ditto "${PODS_ROOT}/#{relative_umbrella_header_path}" "${BUILT_PRODUCTS_DIR}"
+              ditto "${PODS_ROOT}/#{relative_umbrella_header_path}" "${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}"
               printf "\\n\\nmodule ${PRODUCT_MODULE_NAME}.Swift {\\n  header \\"${COMPATIBILITY_HEADER_PATH}\\"\\n  requires objc\\n}\\n" >> "${MODULE_MAP_PATH}"
             SH
             build_phase.input_paths = %W(
@@ -1141,9 +1141,9 @@ module Pod
               ${PODS_ROOT}/#{relative_umbrella_header_path}
             )
             build_phase.output_paths = %W(
-              ${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap
-              ${BUILT_PRODUCTS_DIR}/#{relative_umbrella_header_path.basename}
-              ${BUILT_PRODUCTS_DIR}/Swift\ Compatibility\ Header/${PRODUCT_MODULE_NAME}-Swift.h
+              ${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}/${PRODUCT_MODULE_NAME}.modulemap
+              ${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}/#{relative_umbrella_header_path.basename}
+              ${PODS_CONFIGURATION_BUILD_DIR}/${PRODUCT_MODULE_NAME}/Swift\ Compatibility\ Header/${PRODUCT_MODULE_NAME}-Swift.h
             )
           end
 
